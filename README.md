@@ -21,6 +21,8 @@ python3 tools/build.py mortis --stills   # контрольные кадры
 python3 tools/build.py mortis            # out/mortis/mortis.mp4
 ```
 Время показа каждого экрана — словарь `HOLD` в `tools/build.py`.
+Музыка генерируется своя для каждого бравлера (темп, тональность, аккорды, ударные, тембр выбираются по имени).
+Другой вариант трека: `GUIDE_MUSIC_SEED=42 python3 tools/build.py mortis`.
 
 ## Устройство
 - `guides/<slug>/guide.json` — всё содержимое ролика (тексты, оценки, иконки с вики)
