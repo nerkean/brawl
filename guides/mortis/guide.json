@@ -1,0 +1,83 @@
+{
+  "brawler": "МОРТИС",
+  "hook": {
+    "pre": "ГАЙД НА БРАВЛЕРА",
+    "ribbon": "ЛУЧШАЯ СБОРКА",
+    "icon": "Mortis Skin-Default.png",
+    "vo": "Мортис. Лучшая сборка за тридцать секунд."
+  },
+  "gadgets": [
+    {
+      "name": "КОМБО-СПИННЕР",
+      "icon": "GD-Mortis1.png",
+      "title": "Удар вокруг себя",
+      "text": "урон как от атаки, но без патронов: добивает убегающих",
+      "rating": 5,
+      "verdict": "БЕРИ",
+      "tone": "good",
+      "vo": "Комбо-спиннер бьёт вокруг себя без траты патронов. Берём."
+    },
+    {
+      "name": "ПОРОЖДЕНИЕ НОЧИ",
+      "icon": "GD-Mortis2.png",
+      "title": "Стая летучих мышей",
+      "text": "неуязвимость и полёт через стены, но откат целых 24 секунды",
+      "rating": 3,
+      "verdict": "ДЛЯ ШД",
+      "tone": "mid",
+      "vo": "Порождение ночи выручает в шоудауне, но откат двадцать четыре секунды."
+    }
+  ],
+  "starpowers": [
+    {
+      "name": "СВЕРНУВШАЯСЯ ЗМЕЯ",
+      "icon": "SP-Mortis2.png",
+      "title": "Длинный дэш почти вдвое чаще",
+      "text": "заряд за 2,5 с вместо 4,5",
+      "rating": 5,
+      "verdict": "БЕРИ",
+      "tone": "good",
+      "vo": "Свернувшаяся змея: длинный дэш почти вдвое чаще. Это база."
+    },
+    {
+      "name": "ЖУТКАЯ ЖАТВА",
+      "icon": "SP-Mortis1.png",
+      "title": "+20% HP за убийство",
+      "text": "хорош в зачистках, но в Дуэлях вообще бесполезен",
+      "rating": 3,
+      "verdict": "ЗАПАСНАЯ",
+      "tone": "mid",
+      "vo": "Жуткую жатву оставь на запас, для зачисток."
+    }
+  ],
+  "gears": {
+    "items": [
+      {"name": "УРОН", "icon": "DamageGear.png", "text": "чтобы добивать"},
+      {"name": "ЩИТ", "icon": "ShieldGear.png", "text": "чтобы пережить заход"}
+    ],
+    "verdict": "СТАВЬ ОБА",
+    "vo": "Снаряжение: урон и щит."
+  },
+  "modes": {
+    "rows": [
+      {"label": "ТОП", "tone": "good", "icons": ["Brawl Ball.png", "Bounty.png"]},
+      {"label": "50/50", "tone": "mid", "icons": ["Knockout.png", "Showdown.png", "Gem Grab.png"]},
+      {"label": "НЕТ", "tone": "bad", "icons": ["Heist.png", "Hot Zone.png"]}
+    ],
+    "vo": "Лучше всего броулбол и награда за поимку. В ограбление и горячую зону не бери."
+  },
+  "final": {
+    "next": [
+      {"name": "ЭДГАР", "icon": "Edgar Skin-Default.png", "action": "save"},
+      {"name": "ЛЕОН", "icon": "Leon Skin-Default.png", "action": "like"}
+    ],
+    "sub": "подпишись, чтобы не пропустить новый гайд",
+    "vo": "Кого разобрать следующим? Эдгар — сохраняй, Леон — лайк."
+  },
+  "sources": [
+    "https://brawlstars.fandom.com/wiki/Mortis",
+    "https://brawlstars.fandom.com/ru/wiki/Мортис",
+    "https://www.destructoid.com/best-build-for-mortis-in-brawl-stars/",
+    "https://seemeta.com/en/brawl-stars/brawlers/mortis"
+  ]
+}
