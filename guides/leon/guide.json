@@ -1,0 +1,104 @@
+{
+  "brawler": "ЛЕОН",
+  "hook": {
+    "pre": "ГАЙД НА БРАВЛЕРА",
+    "ribbon": "ЛУЧШАЯ СБОРКА",
+    "icon": "Leon Skin-Default.png"
+  },
+  "gadgets": [
+    {
+      "name": "КЛОНИРОВАНИЕ",
+      "icon": "GD-Leon1.png",
+      "title": "Клон, который стреляет",
+      "text": "после апа бьёт по 800 с 8 клеток: отвлекает и добивает",
+      "rating": 5,
+      "verdict": "БЕРИ",
+      "tone": "good"
+    },
+    {
+      "name": "УПАВШИЙ ЛЕДЕНЕЦ",
+      "icon": "GD-Leon2.png",
+      "title": "Зона невидимости",
+      "text": "прячет всю команду, но леденец быстро тает",
+      "rating": 3,
+      "verdict": "ДЛЯ 3×3",
+      "tone": "mid"
+    }
+  ],
+  "starpowers": [
+    {
+      "name": "ТАЙНОЕ ЛЕКАРСТВО",
+      "icon": "SP-Leon2.png",
+      "title": "+20% HP в секунду",
+      "text": "лечит всё время супера: заходишь и выходишь живым",
+      "rating": 5,
+      "verdict": "БЕРИ",
+      "tone": "good"
+    },
+    {
+      "name": "СЛЕД ДЫМА",
+      "icon": "SP-Leon1.png",
+      "title": "+30% скорости в невидимке",
+      "text": "быстрый заход, но без хила ошибки не прощает",
+      "rating": 4,
+      "verdict": "ЗАПАСНАЯ",
+      "tone": "mid"
+    }
+  ],
+  "gears": {
+    "items": [
+      {
+        "name": "УРОН",
+        "icon": "DamageGear.png",
+        "text": "чтобы добивать"
+      },
+      {
+        "name": "ЩИТ",
+        "icon": "ShieldGear.png",
+        "text": "чтобы пережить заход"
+      }
+    ],
+    "verdict": "СТАВЬ ОБА"
+  },
+  "modes": {
+    "rows": [
+      {
+        "label": "ТОП",
+        "tone": "good",
+        "icons": ["Showdown.png", "Bounty.png"]
+      },
+      {
+        "label": "50/50",
+        "tone": "mid",
+        "icons": ["Knockout.png", "Gem Grab.png", "Brawl Ball.png"]
+      },
+      {
+        "label": "НЕТ",
+        "tone": "bad",
+        "icons": ["Heist.png", "Hot Zone.png"]
+      }
+    ]
+  },
+  "final": {
+    "next": [
+      {
+        "name": "ЭДГАР",
+        "icon": "Edgar Skin-Default.png",
+        "action": "save"
+      },
+      {
+        "name": "ВОРОН",
+        "icon": "Crow Skin-Default.png",
+        "action": "like"
+      }
+    ],
+    "sub": "подпишись, чтобы не пропустить новый гайд"
+  },
+  "sources": [
+    "https://brawlstars.fandom.com/wiki/Leon",
+    "https://brawlstars.fandom.com/ru/wiki/Леон",
+    "https://brawl-tube.blogspot.com/2026/04/leon-brawl-stars-2026-best-build-every.html",
+    "https://seemeta.com/en/brawl-stars/brawlers/leon",
+    "https://clutchpoints.com/gaming/brawl-stars-tier-list-for-legendary-brawlers"
+  ]
+}
