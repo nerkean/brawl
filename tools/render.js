@@ -12,6 +12,7 @@ const { spawn } = require('child_process');
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   await p.goto('file://' + path.resolve(file));
   await p.evaluate(() => document.fonts.ready);
+  await p.evaluate(async () => { await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); window.fitAll && fitAll(); });
   await p.waitForTimeout(400);
   if (mode === 'stills') {
     fs.mkdirSync(path.join(dir, 'stills'), { recursive: true });

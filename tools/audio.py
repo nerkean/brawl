@@ -87,7 +87,10 @@ def stamp(notes, g):
 def boing():
     n = int(.5 * SR); t = np.arange(n) / SR; f = 180 + 260 * np.exp(-t / .08) * np.abs(np.cos(t * 28))
     return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, .002, .18) * .35
-S = {'whoosh': (whoosh(), .9), 'swoosh': (whoosh(.3), .5), 'swoosh2': (whoosh(.3), .45), 'tick2': (tick(1600), 1.2),
+def slam():
+    n = int(.3 * SR); t = np.arange(n) / SR; f = 55 + 140 * np.exp(-t / .025)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .09) * .55 + hp(rng.standard_normal(n), 2500) * env(n, .0005, .02) * .35
+S = {'slam': (slam(), .9), 'whoosh': (whoosh(), .9), 'swoosh': (whoosh(.3), .5), 'swoosh2': (whoosh(.3), .45), 'tick2': (tick(1600), 1.2),
      'pop': (pop(), 1), 'pop2': (pop(320), 1.3), 'boing': (boing(), 1),
      'stampG': (stamp([76, 79, 84], .07), 1), 'stampM': (stamp([72, 76], .08), .8), 'stampB': (stamp([64, 63], .09), 1),
      **{f'tick{i}': (tick(1500 * 2 ** (i * 2 / 12)), 1.1) for i in range(5)}}

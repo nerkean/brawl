@@ -12,8 +12,8 @@ import json, os, re, shutil, subprocess, sys, urllib.parse, urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UA = {"User-Agent": "brawl-guides-builder/1.0"}
 WIKI_API = "https://brawlstars.fandom.com/api.php"
-# Сколько секунд держать каждый блок на экране (время на чтение). Сумма даёт ролик ~30 с.
-HOLD = {"hook": 2.2, "g1": 3.2, "g2": 3.2, "s1": 3.2, "s2": 3.2, "gear": 2.0, "modes": 3.6, "final": 2.6}
+# Сколько секунд держится каждый экран (время на чтение). Итог ~27 с.
+HOLD = {"hook": 2.4, "card": 3.3, "gear": 3.2, "modes": 4.6, "fin": 3.6}
 
 
 def safe(name):
@@ -72,34 +72,21 @@ def fetch_assets(g, adir):
 
 
 def timeline(g, d):
-    """Тайминги сцен. d — сколько секунд нужно на чтение каждого блока (HOLD)."""
+    """Экраны ролика по порядку: заставка, по экрану на каждый гаджет и пассивку, снаряжение, режимы, финал."""
     sc, t = [], 0.0
-    def card_stamp(c):  # когда падает штамп вердикта относительно старта карточки
-        return 1.0 + c["rating"] * .13 + .25
-    # hook
-    dur = max(2.6, d["hook"] + .7)
-    sc.append({"k": "hook", "start": 0, "end": dur, "cues": {"rib": min(1.35, dur - 1.0)}}); t = dur
-    for k, items, a, b in (("gad", g["gadgets"], "g1", "g2"), ("sp", g["starpowers"], "s1", "s2")):
-        c1 = .35
-        c2 = c1 + max(card_stamp(items[0]) + .55, d[a] + .25)
-        end = c2 + max(card_stamp(items[1]) + 1.1, d[b] + .6)
-        r0, r1 = items[0]["rating"], items[1]["rating"]
-        cues = {"c1": c1, "c2": c2,
-                "dim1": (c2 + card_stamp(items[1]) + .35) if r0 < r1 else None,
-                "dim2": (c2 + card_stamp(items[1]) + .35) if r1 < r0 else None}
-        sc.append({"k": k, "start": t, "end": t + end, "cues": cues})
-        t += end
-    dur = max(3.0, d["gear"] + 1.0)
-    sc.append({"k": "gear", "start": t, "end": t + dur, "cues": {"stamp": min(1.5, dur - 1.0)}}); t += dur
-    n = len(g["modes"]["rows"])
-    step = max(.95, (d["modes"] - .3) / n)
-    rows = [.35 + i * step for i in range(n)]
-    dur = max(rows[-1] + 2.0, d["modes"] + .75)
-    sc.append({"k": "maps", "start": t, "end": t + dur, "cues": {"rows": rows}}); t += dur
-    dur = max(3.4, d["final"] + 1.1)
-    act = [1.2, 1.38]
-    sc.append({"k": "fin", "start": t, "end": t + dur, "cues": {"act": act}}); t += dur
-    return {"scenes": sc, "duration": round(t, 3)}
+    def add(k, dur, **kw):
+        nonlocal t
+        sc.append({"k": k, "start": round(t, 3), "end": round(t + dur, 3), **kw}); t += dur
+    add("hook", d["hook"])
+    for src, sec, name in (("gadgets", "gad", "ГАДЖЕТ"), ("starpowers", "sp", "ПАССИВКА")):
+        n = len(g[src])
+        for i in range(n):
+            add("card", d["card"], src=src, sec=sec, idx=i, label="%s %d ИЗ %d" % (name, i + 1, n))
+    add("gear", d["gear"], label="СНАРЯЖЕНИЕ")
+    rows = len(g["modes"]["rows"])
+    add("modes", max(d["modes"], .35 + rows * 1.0 + 1.3), rows=[.35 + i * 1.0 for i in range(rows)], label="РЕЖИМЫ")
+    add("fin", d["fin"], label="ДАЛЬШЕ")
+    return {"screens": sc, "duration": round(t, 3)}
 
 
 def main():
@@ -120,7 +107,7 @@ def main():
     json.dump(tl, open(os.path.join(out, "timeline.json"), "w"), indent=1)
     render = ["node", os.path.join(ROOT, "tools", "render.js"), os.path.join(out, "index.html")]
     if stills:
-        ts = [s["start"] + (s["end"] - s["start"]) * .85 for s in tl["scenes"]]
+        ts = [s["start"] + (s["end"] - s["start"]) * .85 for s in tl["screens"]]
         subprocess.run(render + ["stills"] + ["%.2f" % x for x in ts], check=True)
         print("кадры:", os.path.join(out, "stills"))
         return
