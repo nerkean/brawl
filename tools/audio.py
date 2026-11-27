@@ -1,22 +1,20 @@
 #!/usr/bin/env python3
-"""Звук ролика: синтезированный бит-заглушка + эффекты (sfx.json) + озвучка (vo/*.wav).
-Музыка автоматически приглушается, пока говорит голос.  Использование: audio.py <out_dir>"""
-import json, os, sys, wave
+"""Звук ролика: синтезированный бит-заглушка + звуковые эффекты (sfx.json).  Использование: audio.py <out_dir>"""
+import json, os, sys
 import numpy as np
-from scipy.signal import butter, sosfilt, resample_poly
+from scipy.signal import butter, sosfilt
 from scipy.io import wavfile
 
 OUT = sys.argv[1]
 TL = json.load(open(os.path.join(OUT, "timeline.json")))
 SR = 44100; D = TL["duration"] + 0.4; N = int(SR * D); rng = np.random.default_rng(7)
-music = np.zeros((N, 2)); fx = np.zeros((N, 2)); voice = np.zeros(N)
+music = np.zeros((N, 2)); fx = np.zeros((N, 2))
 
 
 def add(buf, t, sig, pan=0.0, g=1.0):
     i = int(t * SR); j = min(N, i + len(sig))
     if i >= N or j <= 0: return
     s = sig[:j - i] * g
-    if buf.ndim == 1: buf[i:j] += s; return
     buf[i:j, 0] += s * (1 - pan) ** .5; buf[i:j, 1] += s * (1 + pan) ** .5
 
 def env(n, a=.002, d=.2):
@@ -96,19 +94,7 @@ S = {'whoosh': (whoosh(), .9), 'swoosh': (whoosh(.3), .5), 'swoosh2': (whoosh(.3
 for t, k in {tuple(x) for x in json.load(open(os.path.join(OUT, "sfx.json")))}:
     sig, g = S[k]; add(fx, t, sig, g=g)
 
-# ---------- voice ----------
-for key, t0 in TL["vo"].items():
-    with wave.open(os.path.join(OUT, "vo", key + ".wav")) as w:
-        sr = w.getframerate(); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(float) / 32768
-    x = resample_poly(x, SR, sr)
-    x = hp(x, 90); x = x + .35 * bp(x, 2500, 6000)          # убрать гул, добавить разборчивости
-    x = np.tanh(x / (np.abs(x).max() + 1e-9) * 2.2) * .9     # мягкая компрессия
-    add(voice, t0, x)
-venv = np.convolve(np.abs(voice), np.ones(int(.12 * SR)) / int(.12 * SR), 'same')
-vduck = 1 - .62 * np.clip(venv / (venv.max() * .25 + 1e-9), 0, 1)
-vduck = np.convolve(vduck, np.ones(int(.08 * SR)) / int(.08 * SR), 'same')
-
-mix = music * (.75 * vduck)[:, None] + fx * .75 + voice[:, None] * 1.0
+mix = music * .8 + fx * .8
 fo = int(1.2 * SR); mix[-fo:] *= np.linspace(1, 0, fo)[:, None]
 mix = np.tanh(mix * 1.2) / np.tanh(1.2); mix /= np.abs(mix).max() / .89
 wavfile.write(os.path.join(OUT, "audio.wav"), SR, (mix * 32767).astype(np.int16))

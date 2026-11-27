@@ -2,11 +2,11 @@
 <html lang="ru"><head><meta charset="utf-8">
 <!-- Шаблон ролика. Данные подставляет tools/build.py: window.G (guide.json) и window.TL (тайминги). -->
 <style>
-@font-face{font-family:R;src:url(fonts/Rubik-Black.ttf);font-weight:900}
-@font-face{font-family:R;src:url(fonts/Rubik-Bold.ttf);font-weight:700}
+@font-face{font-family:D;src:url(fonts/DaysOne-Regular.ttf)}
+@font-face{font-family:N;src:url(fonts/Nunito-ExtraBold.ttf)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:1080px;height:1920px;overflow:hidden;background:#13234f}
-#stage{position:relative;width:1080px;height:1920px;overflow:hidden;--acc:167,130,214;--ink:#0d1531;color:#fff;font-family:R;font-weight:900}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;--acc:167,130,214;--ink:#0d1531;color:#fff;font-family:D;font-weight:400}
 .bg{position:absolute;inset:0;background:linear-gradient(180deg,#1c3473 0%,#1a3069 50%,#132451 100%)}
 .stripes{position:absolute;inset:-400px;background:repeating-linear-gradient(-30deg,rgba(255,255,255,.028) 0 70px,transparent 70px 140px)}
 .spot{position:absolute;width:1500px;height:1500px;left:-210px;top:200px;border-radius:50%;background:radial-gradient(circle,rgba(var(--acc),.22) 0%,rgba(var(--acc),.07) 40%,transparent 66%)}
@@ -30,7 +30,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#13234f}
 .bd{position:absolute;left:322px;right:30px;top:40px}
 .tag{display:inline-block;font-size:24px;padding:6px 16px;border-radius:12px;background:var(--ink);color:rgb(var(--acc));letter-spacing:.04em}
 .big{font-size:52px;line-height:1.08;margin-top:16px;--sw:9px;--sh:6px}
-.sm{font-weight:700;font-size:30px;line-height:1.3;color:#d3dcf6;margin-top:14px}
+.sm{font-family:N;font-size:30px;line-height:1.3;color:#d3dcf6;margin-top:14px}
 .w{display:inline-block;white-space:pre}
 .stars{position:absolute;left:322px;bottom:30px;display:flex;gap:8px}
 .stars svg{width:54px;height:54px}
@@ -46,7 +46,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#13234f}
 .gb{top:520px;width:450px;height:600px}
 .gb img{position:absolute;left:50%;top:50px;width:320px;height:340px;object-fit:contain;margin-left:-160px;filter:drop-shadow(0 10px 0 rgba(13,21,49,.55))}
 .gb .nm{position:absolute;left:0;right:0;bottom:92px;text-align:center;font-size:64px;--sw:11px;--sh:7px}
-.gb .ds{position:absolute;left:0;right:0;bottom:38px;text-align:center;font-weight:700;font-size:30px;color:#d3dcf6}
+.gb .ds{position:absolute;left:0;right:0;bottom:38px;text-align:center;font-family:N;font-size:30px;color:#d3dcf6}
 #gearVd{left:50%;right:auto;top:1185px;font-size:48px}
 .mr{left:60px;width:960px;height:250px}
 .mr .lb{position:absolute;left:24px;top:50%;width:230px;margin-top:-58px;height:116px;border-radius:22px;background:rgb(var(--c));border:6px solid var(--ink);box-shadow:0 8px 0 var(--ink),inset 0 5px 0 rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;font-size:56px;--sw:10px;--sh:6px}
@@ -61,7 +61,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#13234f}
 .act{position:absolute;top:1218px;width:455px;height:110px;border-radius:26px;display:flex;justify-content:center;align-items:center;gap:16px;font-size:48px;--sw:10px;--sh:6px;border:6px solid var(--ink);box-shadow:0 11px 0 var(--ink),inset 0 -8px 0 rgba(13,21,49,.15)}
 .act.save{background:rgb(232,170,64)}.act.like{background:rgb(223,95,104)}
 .act svg{width:54px;height:54px}
-#sub{position:absolute;left:0;right:0;top:1380px;text-align:center;font-weight:700;font-size:32px;color:#d3dcf6}
+#sub{position:absolute;left:0;right:0;top:1380px;text-align:center;font-family:N;font-size:32px;color:#d3dcf6}
 #swipe{position:absolute;top:-100px;height:2120px;width:2300px;left:-2900px;transform:skewX(-14deg);background:#0d1531;border-left:34px solid rgb(var(--acc));border-right:34px solid rgb(var(--acc))}
 #swipe:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-30deg,rgba(255,255,255,.04) 0 40px,transparent 40px 80px)}
 </style></head><body>
@@ -107,7 +107,7 @@ document.querySelectorAll('.words').forEach(splitWords);
 // auto-fit long texts
 document.querySelectorAll('.hdr h1').forEach(h=>{const max=900;if(h.scrollWidth>max)h.style.fontSize=(parseFloat(getComputedStyle(h).fontSize)*max/h.scrollWidth)+'px'});
 (()=>{const h=document.getElementById('hookName');if(h.scrollWidth>1000)h.style.fontSize=(190*1000/h.scrollWidth)+'px'})();
-document.querySelectorAll('.card .bd').forEach(b=>{const big=b.querySelector('.big');let fs=52;while(b.offsetHeight>270&&fs>36){fs-=2;big.style.fontSize=fs+'px'}});
+document.querySelectorAll('.card .bd').forEach(b=>{const big=b.querySelector('.big');let fs=52;while(b.offsetHeight>240&&fs>36){fs-=2;big.style.fontSize=fs+'px'}});
 
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const cl=x=>x<0?0:x>1?1:x, r=(t,a,d)=>cl((t-a)/d);
