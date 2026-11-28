@@ -13,7 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UA = {"User-Agent": "brawl-guides-builder/1.0"}
 WIKI_API = "https://brawlstars.fandom.com/api.php"
 # Сколько секунд держится каждый экран (время на чтение). Итог ~27 с.
-HOLD = {"hook": 2.4, "card": 3.3, "gear": 3.2, "modes": 4.6, "fin": 3.6}
+HOLD = {"hook": 2.6, "card": 3.3, "gear": 3.2, "modes": 4.6, "fin": 3.6}
 
 
 def safe(name):

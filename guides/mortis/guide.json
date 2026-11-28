@@ -1,6 +1,7 @@
 {
   "brawler": "МОРТИС",
   "hook": {
+    "line": "ТЫ СОБИРАЕШЬ МОРТИСА *НЕПРАВИЛЬНО*",
     "pre": "ГАЙД · BRAWL STARS",
     "ribbon": "ЛУЧШАЯ СБОРКА",
     "icon": "Mortis Skin-Default.png"

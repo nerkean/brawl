@@ -16,8 +16,10 @@ mr = random.Random(SEED)
 
 
 def add(buf, t, sig, pan=0.0, g=1.0):
-    i = int(t * SR); j = min(N, i + len(sig))
-    if i >= N or j <= 0: return
+    i = int(t * SR)
+    if i < 0: sig = sig[-i:]; i = 0
+    j = min(N, i + len(sig))
+    if i >= N or j <= i: return
     s = sig[:j - i] * g
     buf[i:j, 0] += s * (1 - pan) ** .5; buf[i:j, 1] += s * (1 + pan) ** .5
 

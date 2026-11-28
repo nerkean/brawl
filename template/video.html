@@ -41,11 +41,13 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0c0c10}
 .icon{position:absolute;left:50%;top:330px;width:380px;height:380px;margin-left:-190px;object-fit:contain}
 .ring{position:absolute;left:50%;top:520px;width:380px;height:380px;margin:-190px 0 0 -190px;border-radius:50%;border:4px solid rgba(var(--acc),.8)}
 /* hook */
-#hero{position:absolute;left:50%;bottom:330px;height:900px;max-width:1100px;object-fit:contain;transform-origin:50% 100%}
-#hookTop{top:250px}
-#hookName{position:absolute;left:40px;right:40px;top:300px;text-align:center}
-#hookTag{position:absolute;left:0;right:0;top:1640px;text-align:center}
-#hookTag .vd{font-size:54px}
+#hero{position:absolute;left:50%;bottom:300px;height:980px;max-width:1150px;object-fit:contain;transform-origin:50% 100%}
+#heroShade{position:absolute;inset:0;background:linear-gradient(180deg,#0c0c10 0%,rgba(12,12,16,.92) 30%,rgba(12,12,16,.35) 55%,rgba(12,12,16,0) 70%,rgba(12,12,16,.6) 100%)}
+#hookCol{position:absolute;left:70px;right:70px;top:230px}
+#hookCol .k{text-shadow:0 10px 40px rgba(0,0,0,.6);line-height:.92}
+#hookMeta{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:30px}
+#hookMeta .mono{font-size:30px;color:#b8b8c4;white-space:nowrap}
+#hookMeta .vd{font-size:44px;padding:12px 28px 14px}
 /* gears */
 .gi{position:absolute;top:360px;width:420px;text-align:center}
 .gi img{width:340px;height:340px;object-fit:contain}
@@ -80,7 +82,7 @@ const A=f=>'assets/'+f.replace(/[^\w.-]+/g,'_');
 const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M4 12.5l5 5L20 6"/></svg>';
 const ICON={save:'<path d="M5 2h14v20l-7-5-7 5z"/>',like:'<path d="M12 21s-8-5.3-8-11.2C4 6.6 6.4 4.5 9 4.5c1.4 0 2.4.6 3 1.6.6-1 1.6-1.6 3-1.6 2.6 0 5 2.1 5 5.3C20 15.7 12 21 12 21z"/>'};
 const LABEL={save:'СОХРАНИ',like:'ЛАЙК'};
-const ACC={gad:[198,255,61],sp:[255,197,61],gear:[61,224,255],modes:[255,92,168],hook:[198,255,61],fin:[198,255,61]};
+const ACC={gad:[198,255,61],sp:[255,197,61],gear:[61,224,255],modes:[255,92,168],hook:[255,72,72],fin:[198,255,61]};
 const SECNAME={gad:'ГАДЖЕТ',sp:'ПАССИВКА'};
 // "БЬЁТ *ВОКРУГ* СЕБЯ" -> строки по словам, *слово* — акцентом; "/" — принудительный перенос строки
 function kinetic(text){const lines=(text.includes('/')?text.split('/'):text.trim().split(/\s+/)).filter(l=>l.trim());
@@ -89,8 +91,9 @@ function verdict(v,tone){return `<div class="vd ${tone}">${tone==='good'?CHECK:'
 const S=TL.screens; let html='';
 S.forEach((s,i)=>{
   let h='';
-  if(s.k==='hook'){h=`<img id="hero" src="${A(G.hook.icon)}"><div class="col mono" id="hookTop" style="top:250px;text-align:center;font-size:30px;color:#8a8a96">${esc(G.hook.pre)}</div>
-    <div id="hookName" class="k fit" data-size="220">${kinetic(G.brawler)}</div><div id="hookTag">${verdict(G.hook.ribbon,'good')}</div>`}
+  if(s.k==='hook'){h=`<img id="hero" src="${A(G.hook.icon)}"><div id="heroShade"></div>
+    <div id="hookCol"><div class="k fit" data-size="150" data-justify="230">${kinetic(G.hook.line||G.brawler)}</div>
+    <div id="hookMeta"><span class="mono">${esc(G.hook.pre)}</span>${verdict(G.hook.ribbon,'good')}</div></div>`}
   if(s.k==='card'){const c=G[s.src][s.idx];
     h=`<div class="ghost">${SECNAME[s.sec]}</div><div class="ring"></div><img class="icon" src="${A(c.icon)}">
     <div class="col" style="top:770px"><div class="tagn mono">${esc(c.name)}</div><div class="k fit" data-size="150">${kinetic(c.punch)}</div>
@@ -109,7 +112,9 @@ let FITTED=false;
 function fitAll(){document.querySelectorAll('.fit').forEach(el=>{let fs=+el.dataset.size; el.style.fontSize=fs+'px'; const max=940;
   const lines=[...el.querySelectorAll('.ln')]; lines.forEach(l=>l.style.display='inline-block');
   const widest=()=>Math.max(...lines.map(l=>l.getBoundingClientRect().width));
-  while(widest()>max&&fs>50){fs-=4;el.style.fontSize=fs+'px'} lines.forEach(l=>l.style.display='')}); FITTED=true;}
+  while(widest()>max&&fs>50){fs-=4;el.style.fontSize=fs+'px'}
+  if(el.dataset.justify){const cap=+el.dataset.justify; lines.forEach(l=>{const w=l.getBoundingClientRect().width; l.style.fontSize=Math.min(cap,fs*max/w)+'px'})}
+  lines.forEach(l=>l.style.display='')}); FITTED=true;}
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const cl=x=>x<0?0:x>1?1:x, r=(t,a,d)=>cl((t-a)/d);
 const oC=x=>1-Math.pow(1-x,3), oQ=x=>1-Math.pow(1-x,5);
@@ -125,8 +130,10 @@ function iconIn(img,ring,lt,a,base){const k=r(lt,a,.45); img.style.opacity=k>0?1
   if(ring){const q=r(lt,a+.05,.7); ring.style.opacity=(1-q)*.9; ring.style.transform=`scale(${lerp(.6,1.6,oC(q))})`;} sfx(base+a,'pop2');}
 
 const RUN={
- hook(sc,lt,b){const he=$('#hero',sc), k=r(lt,.05,.6); he.style.opacity=k; he.style.transform=`translateX(-50%) translateY(${(1-oC(k))*160}px) scale(${lerp(1.15,1,oC(k))+lt*.012})`;
-  rise($('#hookTop',sc),lt,.1); words($('#hookName',sc),lt,.3,.12,b); const t=$('#hookTag .vd',sc); slam(t,lt,1.05,b); sfx(b+.05,'whoosh');},
+ hook(sc,lt,b){// первый кадр уже с текстом: первое слово «приземлено» к t=0 (это и превью в ленте)
+  const e=words($('#hookCol .k',sc),lt,-.25,.11,b);
+  const he=$('#hero',sc), k=r(lt,.1,.7); he.style.opacity=.35+.65*k; he.style.transform=`translateX(-50%) translateY(${(1-oC(k))*220}px) scale(${lerp(1.12,1,oC(k))+lt*.015})`;
+  const m=$('#hookMeta',sc); rise($('.mono',m),lt,e+.15,20); slam($('.vd',m),lt,e+.35,b);},
  card(sc,lt,b,s){iconIn($('.icon',sc),$('.ring',sc),lt,.05,b); rise($('.tagn',sc),lt,.2,20);
   const e=words($('.k',sc),lt,.32,.13,b); rise($('.sub',sc),lt,e+.1);
   const mt=$$('.meter i',sc), R=G[s.src][s.idx].rating; mt.forEach((m,i)=>{m.className=(i<R&&lt>=e+.35+i*.08)?'on':''; if(i<R)sfx(b+e+.35+i*.08,'tick'+i)});
