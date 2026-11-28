@@ -1,7 +1,7 @@
 {
   "brawler": "ПАЙПЕР",
   "hook": {
-    "line": "ТВОЯ ПАЙПЕР СТРЕЛЯЕТ *МЕДЛЕННО*",
+    "line": "ЧЕМ ДАЛЬШЕ, ТЕМ *БОЛЬНЕЕ*",
     "pre": "ГАЙД · BRAWL STARS",
     "ribbon": "ЛУЧШАЯ СБОРКА",
     "icon": "Piper Skin-Default.png"
@@ -93,8 +93,8 @@
   "final": {
     "next": [
       {
-        "name": "БРОК",
-        "icon": "Brock Skin-Default.png",
+        "name": "МЭНДИ",
+        "icon": "Mandy Skin-Default.png",
         "action": "save"
       },
       {
