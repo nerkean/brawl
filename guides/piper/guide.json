@@ -1,9 +1,9 @@
 {
   "brawler": "ПАЙПЕР",
   "hook": {
-    "line": "ЧЕМ ДАЛЬШЕ, ТЕМ *БОЛЬНЕЕ*",
+    "line": "ЛУЧШАЯ СБОРКА НА *ПАЙПЕР*",
     "pre": "ГАЙД · BRAWL STARS",
-    "ribbon": "ЛУЧШАЯ СБОРКА",
+    "ribbon": "АКТУАЛЬНО · 2026",
     "icon": "Piper Skin-Default.png"
   },
   "gadgets": [
@@ -93,8 +93,8 @@
   "final": {
     "next": [
       {
-        "name": "МЭНДИ",
-        "icon": "Mandy Skin-Default.png",
+        "name": "БАРЛИ",
+        "icon": "Barley Skin-Default.png",
         "action": "save"
       },
       {
