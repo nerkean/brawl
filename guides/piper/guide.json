@@ -1,0 +1,116 @@
+{
+  "brawler": "ПАЙПЕР",
+  "hook": {
+    "line": "ТВОЯ ПАЙПЕР СТРЕЛЯЕТ *МЕДЛЕННО*",
+    "pre": "ГАЙД · BRAWL STARS",
+    "ribbon": "ЛУЧШАЯ СБОРКА",
+    "icon": "Piper Skin-Default.png"
+  },
+  "gadgets": [
+    {
+      "name": "АВТОМАТИЧЕСКИЙ ПРИЦЕЛ",
+      "icon": "GD-Piper1.png",
+      "punch": "*ОТКИНЬ* ВРАГА",
+      "text": "Выстрел в ближайшего врага с отбросом, откат 18 с",
+      "rating": 5,
+      "verdict": "БЕРИ",
+      "tone": "good"
+    },
+    {
+      "name": "ДОМАШНИЙ РЕЦЕПТ",
+      "icon": "GD-Piper2.png",
+      "punch": "ПУЛЯ *САМА* ЛЕТИТ",
+      "text": "Самонаводка и +1,67 клетки дальности на 1 выстрел",
+      "rating": 4,
+      "verdict": "ДОБИВАТЬ",
+      "tone": "mid"
+    }
+  ],
+  "starpowers": [
+    {
+      "name": "КЭШБЭК",
+      "icon": "SP-Piper2.png",
+      "punch": "*+0,4* ПАТРОНА/ЗА ПОПАДАНИЕ",
+      "text": "Лечит главный минус — очень долгую перезарядку",
+      "rating": 5,
+      "verdict": "БЕРИ",
+      "tone": "good"
+    },
+    {
+      "name": "ЗАСАДА",
+      "icon": "SP-Piper1.png",
+      "punch": "*+35%* УРОНА/ИЗ КУСТОВ",
+      "text": "+1260 урона на макс. дистанции, только из кустов",
+      "rating": 3,
+      "verdict": "ДЛЯ КУСТОВ",
+      "tone": "mid"
+    }
+  ],
+  "gears": {
+    "items": [
+      {
+        "name": "УРОН",
+        "icon": "DamageGear.png",
+        "text": "чтобы добивать"
+      },
+      {
+        "name": "ЩИТ",
+        "icon": "ShieldGear.png",
+        "text": "пережить первый заход"
+      }
+    ],
+    "verdict": "СТАВЬ ОБА"
+  },
+  "modes": {
+    "rows": [
+      {
+        "label": "ТОП",
+        "tone": "good",
+        "icons": [
+          "Knockout.png",
+          "Bounty.png"
+        ]
+      },
+      {
+        "label": "50/50",
+        "tone": "mid",
+        "icons": [
+          "Gem Grab.png",
+          "Showdown.png",
+          "Heist.png"
+        ]
+      },
+      {
+        "label": "НЕТ",
+        "tone": "bad",
+        "icons": [
+          "Brawl Ball.png",
+          "Hot Zone.png"
+        ]
+      }
+    ]
+  },
+  "final": {
+    "next": [
+      {
+        "name": "БРОК",
+        "icon": "Brock Skin-Default.png",
+        "action": "save"
+      },
+      {
+        "name": "БЕЛЛЬ",
+        "icon": "Belle Skin-Default.png",
+        "action": "like"
+      }
+    ],
+    "sub": "подпишись, чтобы не пропустить новый гайд"
+  },
+  "sources": [
+    "https://brawlstars.fandom.com/wiki/Piper",
+    "https://brawlstars.fandom.com/ru/wiki/Пайпер",
+    "https://www.noff.gg/brawl-stars/builds/piper",
+    "https://www.allclash.com/best-piper-builds-in-brawl-stars-for-each-game-mode-gear-gadget-star-power-hypercharge/",
+    "https://timesaver.gg/blog/brawl-stars-best-maps-august-2026",
+    "https://powerleagueprodigy.com/piper"
+  ]
+}
